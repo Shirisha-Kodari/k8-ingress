@@ -32,7 +32,7 @@ create IAM Role and k8 ServiceAccount. mapping between IAM roles and k8 service 
   --attach-policy-arn=arn:aws:iam::$ACC_ID:policy/AWSLoadBalancerControllerIAMPolicy \
   --override-existing-serviceaccounts \
   --region $REGION_CODE \
-  --approve
+  --approve 
 
  eksctl create iamserviceaccount \
   --cluster=roboshop \
@@ -42,9 +42,9 @@ create IAM Role and k8 ServiceAccount. mapping between IAM roles and k8 service 
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
-```
+``` 
 ### install load balancer controller driers
 ```
-helm repo add eks https://aws.github.io/eks-charts
+helm repo add eks https://aws.github.io/eks-charts 
 ```
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=$CLUSTER_NAME --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=$CLUSTER_NAME --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller 
