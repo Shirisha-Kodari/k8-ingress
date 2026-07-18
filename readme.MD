@@ -68,3 +68,11 @@ create records also
 
 we add acm arn as annonations 
 add certificate arn 
+
+test for app1 and app2 :
+create 2 records 
+give name and select alias applicaion and class load balancer 
+select load balancer 
+select us-east-1 
+
+we mention group name usd for multiple serveuce we use one load balancer 

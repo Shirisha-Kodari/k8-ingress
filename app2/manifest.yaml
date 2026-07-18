@@ -53,14 +53,14 @@ metadata:
   name: app2
   annotations:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:203981192510:certificate/2bdc5f16-044e-49f9-9a8f-2ab480d79486
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:547520640015:certificate/91fbd2da-98d5-4766-869e-dadce911b8fd
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: joindevops
 spec:
   ingressClassName: alb
   rules:
-  - host: "app2.daws84s.cfd"
+  - host: "app2.kodari.online" 
     http:
       paths:
       - pathType: Prefix
