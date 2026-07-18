@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: app1
+   name: app1  #this is deployment name
    # deployment labels
    labels:
      purpose: ingress
@@ -14,7 +14,7 @@ spec:
      matchLabels:
         purpose: ingress
         project: roboshop
-        app: app1
+        app: app1 
        # this is pod definition
   template: 
     metadata:
@@ -22,7 +22,7 @@ spec:
          purpose: ingress
          project: roboshop
          app: app1
-    spec:
+    spec: 
       containers:
       - name: app1
         image:  shirisha104/app1:v1 
@@ -45,27 +45,38 @@ spec:
       port: 80 # service port
       targetPort: 80 # container port
 ---
-
+# create ingress resource 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app1
   annotations: #kubernets extra service 
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:203981192510:certificate/2bdc5f16-044e-49f9-9a8f-2ab480d79486
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:547520640015:certificate/91fbd2da-98d5-4766-869e-dadce911b8fd
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-type: ip #traffic forward directly ip of pod
     alb.ingress.kubernetes.io/group.name: joindevops #we mention group so load balancer ingree worked on ,multiple rules app1.daws84s.cfdand app2.daws8s.cfd
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.daws84s.cfd"
+  - host: "app1.kodari.online" # this is tesing purpose like application 
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: app1
+            name: app1  #request go to app1 
             port:
               number: 80 # app1 service port
+
+#Without the same group name, AWS creates a separate ALB for each Ingress, increasing cost.
+#/
+ #  path rules: 
+ #/login
+
+ #/products
+
+# /api
+
+# if someone hit from app1.kori.online it send traffic to app1 

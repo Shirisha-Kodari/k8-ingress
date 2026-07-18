@@ -4,7 +4,7 @@ trust and authecation provider
 
 REGION_CODE=us-east-1
 CLUSTER_NAME=roboshop
-ACC_ID=203981192510
+ACC_ID=547520640015 
 ``` 
 eksctl utils associate-iam-oidc-provider \
     --region $REGION_CODE \
@@ -34,11 +34,15 @@ create IAM Role and k8 ServiceAccount. mapping between IAM roles and k8 service 
   --region $REGION_CODE \
   --approve 
 
+after run this verifu SA created or not kubectl get sa -n kube-system 
+
+aws-load-balancer-controller   ->shloud see this 
+
  eksctl create iamserviceaccount \
   --cluster=roboshop \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
-  --attach-policy-arn=arn:aws:iam::203981192510:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::547520640015:policy/AWSLoadBalancerControllerIAMPolicy \
   --override-existing-serviceaccounts \
   --region us-east-1 \
   --approve
@@ -48,3 +52,19 @@ create IAM Role and k8 ServiceAccount. mapping between IAM roles and k8 service 
 helm repo add eks https://aws.github.io/eks-charts 
 ```
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=$CLUSTER_NAME --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller 
+
+kubectl get pods -n kube-system 
+
+should see: below drivers 
+
+aws-load-balancer-controller-f4c66fc59-55bf4   
+aws-load-balancer-controller-f4c66fc59-dwhbk 
+
+alb is not part of cluster  it is outof part 
+workernode and control plan 
+
+create acm *.kodari.online add app1.kodari.online and app2.kodari.online 
+create records also 
+
+we add acm arn as annonations 
+add certificate arn 
