@@ -1,7 +1,7 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata:  
-   name: app1  #this is deployment name       
+   name: app1  #this is deployment name        
    # deployment labels    
    labels:
      purpose: ingress
